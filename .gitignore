@@ -22,3 +22,27 @@ __pycache__/
 
 # Fichiers de configuration locaux
 .env
+
+# Secrets et fichiers sensibles
+*.env
+.env
+*.secret
+secrets.json
+
+# Fichiers de configuration spécifiques à l'utilisateur
+config_local.py
+local_settings.py
+
+# Fichiers de système
+.DS_Store
+Thumbs.db
+
+# Fichiers de build et de distribution
+build/
+dist/
+*.egg-info/
+
+# Fichiers de backup
+*.bak
+*.swp
+*~
