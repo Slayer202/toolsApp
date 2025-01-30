@@ -1,0 +1,24 @@
+# Environnements virtuels
+.venv/
+venv/
+env/
+
+# Fichiers Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Fichiers de configuration IDE
+.vscode/
+.idea/
+
+# Fichiers de log
+*.log
+
+# Base de données locales
+*.sqlite
+*.db
+
+# Fichiers de configuration locaux
+.env

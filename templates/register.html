@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - Bouge Ton Cul</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            background: #2B2D42;
+        }
+
+        .navbar-brand {
+            color: white !important;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .register-container {
+            max-width: 500px;
+            margin: auto;
+            padding: 2rem;
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .card-header {
+            background: #FF4B2B;
+            color: white;
+            border-radius: 15px 15px 0 0 !important;
+            padding: 1.5rem;
+        }
+
+        .form-control {
+            border-radius: 10px;
+            padding: 0.8rem 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .btn-primary {
+            background: #FF4B2B;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .btn-primary:hover {
+            background: #ff3615;
+            transform: translateY(-2px);
+        }
+
+        .alert {
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .login-link a {
+            color: #FF4B2B;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .password-requirements {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        .requirement {
+            margin-bottom: 0.2rem;
+        }
+
+        .requirement i {
+            margin-right: 0.5rem;
+        }
+
+        .valid {
+            color: #198754;
+        }
+
+        .invalid {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark">
+        <div class="container">
+            <a class="navbar-brand" href="/">
+                <i class="fas fa-running"></i> Bouge Ton Cul
+            </a>
+        </div>
+    </nav>
+
+    <div class="container register-container my-5">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="mb-0"><i class="fas fa-user-plus"></i> Inscription</h3>
+            </div>
+            <div class="card-body">
+                <div id="alert-container"></div>
+                <form id="registerForm">
+                    <div class="mb-3">
+                        <label for="username" class="form-label">Nom d'utilisateur</label>
+                        <input type="text" class="form-control" id="username" required minlength="3" maxlength="20">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Mot de passe</label>
+                        <input type="password" class="form-control" id="password" required minlength="8">
+                        <div class="password-requirements">
+                            <div class="requirement" id="length">
+                                <i class="fas fa-circle"></i> Au moins 8 caractères
+                            </div>
+                            <div class="requirement" id="uppercase">
+                                <i class="fas fa-circle"></i> Au moins une majuscule
+                            </div>
+                            <div class="requirement" id="lowercase">
+                                <i class="fas fa-circle"></i> Au moins une minuscule
+                            </div>
+                            <div class="requirement" id="number">
+                                <i class="fas fa-circle"></i> Au moins un chiffre
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirm_password" class="form-label">Confirmer le mot de passe</label>
+                        <input type="password" class="form-control" id="confirm_password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-user-plus"></i> S'inscrire
+                    </button>
+                </form>
+                <div class="login-link">
+                    <p>Déjà un compte ? <a href="/login">Connectez-vous ici</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('confirm_password');
+        const requirements = {
+            length: document.getElementById('length'),
+            uppercase: document.getElementById('uppercase'),
+            lowercase: document.getElementById('lowercase'),
+            number: document.getElementById('number')
+        };
+
+        function validatePassword() {
+            const pwd = password.value;
+            
+            // Vérifier la longueur
+            if (pwd.length >= 8) {
+                requirements.length.classList.add('valid');
+                requirements.length.classList.remove('invalid');
+                requirements.length.querySelector('i').className = 'fas fa-check-circle';
+            } else {
+                requirements.length.classList.remove('valid');
+                requirements.length.classList.add('invalid');
+                requirements.length.querySelector('i').className = 'fas fa-circle';
+            }
+            
+            // Vérifier les majuscules
+            if (/[A-Z]/.test(pwd)) {
+                requirements.uppercase.classList.add('valid');
+                requirements.uppercase.classList.remove('invalid');
+                requirements.uppercase.querySelector('i').className = 'fas fa-check-circle';
+            } else {
+                requirements.uppercase.classList.remove('valid');
+                requirements.uppercase.classList.add('invalid');
+                requirements.uppercase.querySelector('i').className = 'fas fa-circle';
+            }
+            
+            // Vérifier les minuscules
+            if (/[a-z]/.test(pwd)) {
+                requirements.lowercase.classList.add('valid');
+                requirements.lowercase.classList.remove('invalid');
+                requirements.lowercase.querySelector('i').className = 'fas fa-check-circle';
+            } else {
+                requirements.lowercase.classList.remove('valid');
+                requirements.lowercase.classList.add('invalid');
+                requirements.lowercase.querySelector('i').className = 'fas fa-circle';
+            }
+            
+            // Vérifier les chiffres
+            if (/[0-9]/.test(pwd)) {
+                requirements.number.classList.add('valid');
+                requirements.number.classList.remove('invalid');
+                requirements.number.querySelector('i').className = 'fas fa-check-circle';
+            } else {
+                requirements.number.classList.remove('valid');
+                requirements.number.classList.add('invalid');
+                requirements.number.querySelector('i').className = 'fas fa-circle';
+            }
+        }
+
+        password.addEventListener('input', validatePassword);
+
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm_password').value;
+            
+            if (password !== confirmPassword) {
+                showAlert('danger', 'Les mots de passe ne correspondent pas');
+                return;
+            }
+            
+            try {
+                const response = await fetch('/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        email: email,
+                        password: password
+                    })
+                });
+
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showAlert('success', 'Inscription réussie ! Redirection...');
+                    setTimeout(() => {
+                        window.location.href = '/login';
+                    }, 2000);
+                } else {
+                    showAlert('danger', data.error || 'Erreur lors de l\'inscription');
+                }
+            } catch (error) {
+                showAlert('danger', 'Erreur lors de l\'inscription');
+            }
+        });
+
+        function showAlert(type, message) {
+            const alertContainer = document.getElementById('alert-container');
+            alertContainer.innerHTML = `
+                <div class="alert alert-${type} alert-dismissible fade show" role="alert">
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            `;
+        }
+    </script>
+</body>
+</html>
