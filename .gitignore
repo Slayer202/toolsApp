@@ -1,43 +1,41 @@
-# Environnements virtuels
-.venv/
-venv/
-env/
+# Exclusions minimales pour la sécurité
 
-# Fichiers Python
+# Environnements virtuels - garder uniquement les dossiers spécifiques
+!.venv/
+!venv/
+!env/
+
+# Fichiers Python - garder tout sauf
 __pycache__/
 *.pyc
 *.pyo
 *.pyd
 
-# Fichiers de configuration IDE
+# Fichiers de configuration IDE - garder les configurations essentielles
+!.vscode/settings.json
+!.vscode/tasks.json
+!.idea/runConfigurations/
 .vscode/
 .idea/
 
-# Fichiers de log
-*.log
-
-# Base de données locales
-*.sqlite
-*.db
-
-# Fichiers de configuration locaux
-.env
-
-# Secrets et fichiers sensibles
+# Secrets - protéger uniquement les fichiers sensibles
 *.env
 .env
 *.secret
 secrets.json
 
-# Fichiers de configuration spécifiques à l'utilisateur
-config_local.py
-local_settings.py
+# Fichiers de log - exclure les logs
+*.log
 
-# Fichiers de système
+# Base de données - protéger les bases de données sensibles
+*.sqlite
+*.db
+
+# Fichiers système
 .DS_Store
 Thumbs.db
 
-# Fichiers de build et de distribution
+# Ignorer les fichiers de build et de distribution
 build/
 dist/
 *.egg-info/
