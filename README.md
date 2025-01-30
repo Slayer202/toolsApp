@@ -1,19 +1,51 @@
-# Bouge Ton Cul - Trouveur d'Activités
+# Activités France
 
-Application web permettant de trouver des activités dans un rayon de 40km autour d'une ville en France.
+## Description
+Une application web pour découvrir et gérer des activités en France.
 
-## Installation locale
+## Prérequis
+- Python 3.12
+- pip
+- virtualenv
 
-1. Cloner le repository
-2. Installer les dépendances :
+## Installation
+
+1. Clonez le dépôt
+```bash
+git clone https://github.com/Slayer202/toolsApp.git
+cd activites-france
+```
+
+2. Créez un environnement virtuel
+```bash
+python -m venv venv
+source venv/bin/activate  # Sur Unix
+venv\Scripts\activate  # Sur Windows
+```
+
+3. Installez les dépendances
 ```bash
 pip install -r requirements.txt
 ```
-3. Lancer l'application :
+
+4. Configurez les variables d'environnement
 ```bash
-python app.py
+cp .env.example .env
+# Éditez .env avec vos paramètres
+```
+
+5. Initialisez la base de données
+```bash
+python init_db.py
+```
+
+6. Lancez l'application
+```bash
+flask run
 ```
 
 ## Déploiement
+Consultez la documentation de votre hébergeur pour le déploiement spécifique.
 
-L'application est déployée sur PythonAnywhere et accessible à l'adresse : bougetoncul.fr
+## Licence
+[À DÉFINIR]
